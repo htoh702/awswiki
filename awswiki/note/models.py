@@ -1,8 +1,7 @@
 from django.db import models
 
 class note(models.Model):
-    noteId = models.AutoField(primary_key=True)
-    index = models.indexes
+    index = models.AutoField(primary_key=True)
     tag = models.CharField(max_length=50, null=False)
     title = models.CharField(max_length=50, null=False)
     writer = models.CharField(max_length=10, null=False)
@@ -16,7 +15,7 @@ class note(models.Model):
 
 class note_reviews(models.Model):
     noteReviewId = models.AutoField(primary_key=True)
-    noteId = models.ForeignKey(note, on_delete=models.CASCADE)
+    index = models.ForeignKey(note, on_delete=models.CASCADE)
     reivew = models.CharField(max_length=50)
 
 

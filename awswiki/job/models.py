@@ -1,8 +1,7 @@
 from django.db import models
 
 class job(models.Model):
-    jobId = models.AutoField(primary_key=True)
-    index = models.indexes 
+    index = models.AutoField(primary_key=True)
     tag = models.CharField(max_length=50, null=False)
     title = models.CharField(max_length=50, null=False)
     writer = models.CharField(max_length=10, null=False)
@@ -16,7 +15,7 @@ class job(models.Model):
 
 class job_reviews(models.Model):
     jobReviewId = models.AutoField(primary_key=True)
-    jobId = models.ForeignKey(job, on_delete=models.CASCADE)
+    index = models.ForeignKey(job, on_delete=models.CASCADE)
     reivew = models.CharField(max_length=50)
 
 
