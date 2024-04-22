@@ -1,12 +1,14 @@
 from rest_framework import serializers
-from .models import note_reviews, note
+from .models import Note, NoteReview
 
-class noteSerializer(serializers.ModelSerializer):
-    class Meta :
-        model = note
+class NoteReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NoteReview
         fields = '__all__'
 
-class note_reviewsSerializer(serializers.ModelSerializer):
-    class Meta :
-        model = note_reviews
+class NoteSerializer(serializers.ModelSerializer):
+    reviews = NoteReviewSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Note
         fields = '__all__'

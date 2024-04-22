@@ -1,20 +1,17 @@
 from django.db import models
 
-class photo(models.Model):
+class Photo(models.Model):
     index = models.AutoField(primary_key=True)
-    tag = models.CharField(max_length=50, null=False)
-    date = models.DateTimeField(max_length=50, auto_now=True)
-    image = models.FileField(upload_to = 'photo/images/', null=True)
+    tag = models.CharField(max_length=50)
+    date = models.DateTimeField(auto_now=True)
+    image = models.FileField(upload_to='Photo/images/', null=True)
 
     def __str__(self):
-        return str(self.photoId)
+        return f"Photo {self.index}"
 
-
-class photo_reviews(models.Model):
-    photoReviewId = models.AutoField(primary_key=True)
-    index = models.ForeignKey(photo, on_delete=models.CASCADE)
-    reivew = models.CharField(max_length=50)
-
+class PhotoReview(models.Model):
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='reviews')
+    review = models.CharField(max_length=50)
 
     def __str__(self):
-        return str(self.photoReviewId)
+        return f"Review {self.review} for Photo {self.photo.index}"  # Changed from self.photo.photo to self.photo.index
