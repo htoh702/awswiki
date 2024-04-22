@@ -1,16 +1,16 @@
-from django.urls import path,include
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import NoteAPI, NoteReviewsAPI
 
-from .views import noteAPI, note_reviewsAPI
-from rest_framework import routers
+# Create routers for each of the viewsets
+Note_router = DefaultRouter()
+Note_router.register(r'api', NoteAPI, basename='Note')
 
-note_router = routers.DefaultRouter()
-note_router.register(r'api', noteAPI, basename="note_api")
+Note_reviews_router = DefaultRouter()
+Note_reviews_router.register(r'api', NoteReviewsAPI, basename='Note_review')
 
-note_reviews_router = routers.DefaultRouter()
-note_reviews_router.register(r'api', note_reviewsAPI, basename="note_api_reviews")
-
-
+# URL patterns that include the routers
 urlpatterns = [
-    path('', include(note_router.urls)),
-    path('reviews/', include(note_reviews_router.urls))
+    path('', include(Note_router.urls)),
+    path('review/', include(Note_reviews_router.urls)),
 ]

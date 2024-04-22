@@ -1,23 +1,21 @@
 from django.db import models
 
-class job(models.Model):
+class Job(models.Model):
     index = models.AutoField(primary_key=True)
-    tag = models.CharField(max_length=50, null=False)
-    title = models.CharField(max_length=50, null=False)
-    writer = models.CharField(max_length=10, null=False)
-    content = models.CharField(max_length=100, null=False)
-    date = models.DateTimeField(max_length=50, auto_now=True)
-    image = models.FileField(upload_to = 'job/images/', null=True)
+    tag = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+    writer = models.CharField(max_length=10)
+    content = models.CharField(max_length=100)
+    date = models.DateTimeField(auto_now=True)
+    image = models.FileField(upload_to='job/images/', null=True, blank=True)  # added blank=True for forms
 
     def __str__(self):
-        return str(self.jobId)
-
-
-class job_reviews(models.Model):
+        return f"{self.title} by {self.writer}"  
+    
+class JobReview(models.Model):
     jobReviewId = models.AutoField(primary_key=True)
-    index = models.ForeignKey(job, on_delete=models.CASCADE)
-    reivew = models.CharField(max_length=50)
-
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='reviews')  # Updated related_name to 'reviews'
+    review = models.CharField(max_length=50)
 
     def __str__(self):
-        return str(self.jobReviewId)
+        return self.review 
