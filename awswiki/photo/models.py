@@ -3,6 +3,7 @@ from django.db import models
 class photo(models.Model):
     photoId = models.AutoField(primary_key=True)
     index = models.indexes 
+    tag = models.CharField(max_length=50, null=False)
     date = models.DateTimeField(max_length=50, auto_now=True)
     image = models.FileField(upload_to = 'photo/images/', null=True)
 

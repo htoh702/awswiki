@@ -2,7 +2,8 @@ from django.db import models
 
 class note(models.Model):
     noteId = models.AutoField(primary_key=True)
-    index = models.indexes 
+    index = models.indexes
+    tag = models.CharField(max_length=50, null=False)
     title = models.CharField(max_length=50, null=False)
     writer = models.CharField(max_length=10, null=False)
     content = models.CharField(max_length=100, null=False)
