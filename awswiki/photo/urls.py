@@ -1,12 +1,12 @@
 from django.urls import path,include
 
-from .views import TravelAPI
+from .views import PhotoAPI
 from rest_framework import routers
 
-travel_router = routers.DefaultRouter()
-travel_router.register(r'api', TravelAPI, basename="cafe_post")
+photo_router = routers.DefaultRouter()
+photo_router.register(r'api', PhotoAPI, basename="photo_post")
 
 
 urlpatterns = [
-    path('', include(travel_router.urls)),
+    path('', include(photo_router.urls)),
 ]

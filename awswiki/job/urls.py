@@ -1,12 +1,12 @@
 from django.urls import path,include
 
-from .views import NoteAPI
+from .views import JobAPI
 from rest_framework import routers
 
-note_router = routers.DefaultRouter()
-note_router.register(r'api', NoteAPI, basename="Not_api")
+job_router = routers.DefaultRouter()
+job_router.register(r'api', JobAPI, basename="Job_api")
 
 
 urlpatterns = [
-    path('', include(note_router.urls)),
+    path('', include(job_router.urls)),
 ]
