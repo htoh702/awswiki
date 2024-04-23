@@ -7,7 +7,7 @@ class Job(models.Model):
     writer = models.CharField(max_length=10)
     content = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now=True)
-    image = models.FileField(upload_to='job/images/', null=True, blank=True)
+    image = models.FileField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} by {self.writer}"  
