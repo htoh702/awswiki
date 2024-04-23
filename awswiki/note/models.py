@@ -14,7 +14,7 @@ class Note(models.Model):
     
 class NoteReview(models.Model):
     noteReviewId = models.AutoField(primary_key=True)
-    note = models.ForeignKey(Note, on_delete=models.CASCADE)
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='reviews')
     review = models.CharField(max_length=50)
 
     def __str__(self):
