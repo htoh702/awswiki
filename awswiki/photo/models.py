@@ -10,7 +10,7 @@ class Photo(models.Model):
         return f"Photo {self.index}"
 
 class PhotoReview(models.Model):
-    photo = models.ForeignKey(Photo, on_delete=models.CASCADE, related_name='reviews')
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
     review = models.CharField(max_length=50)
 
     def __str__(self):
