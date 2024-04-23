@@ -24,9 +24,9 @@ class JobReviewsAPI(viewsets.ModelViewSet):
         if not search:
             return Response("Search parameter 'search' is required.", status=status.HTTP_400_BAD_REQUEST)
 
-        job_results = job.objects.filter(tag__icontains=search) | job.objects.filter(title__icontains=search) | job.objects.filter(content__icontains=search)
-        note_results = note.objects.filter(tag__icontains=search) | note.objects.filter(title__icontains=search) | note.objects.filter(content__icontains=search)
-        photo_results = photo.objects.filter(tag__icontains=search)
+        job_results = Job.objects.filter(tag__icontains=search) | Job.objects.filter(title__icontains=search) | Job.objects.filter(content__icontains=search)
+        note_results = Note.objects.filter(tag__icontains=search) | Note.objects.filter(title__icontains=search) | Note.objects.filter(content__icontains=search)
+        photo_results = Photo.objects.filter(tag__icontains=search)
 
         search_results = list(job_results) + list(note_results) + list(photo_results)
 
