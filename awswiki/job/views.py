@@ -5,11 +5,11 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import viewsets, status
-from job.serializers import jobSerializer, job_reviewsSerializer, searchSerializer
-from job.models import job, job_reviews
+from job.serializers import JobSerializer, JobReviewSerializer, searchSerializer
+from job.models import Job, JobReview
 
-from note.models import note
-from photo.models import photo
+from note.models import Note
+from photo.models import Photo
 
 class JobAPI(viewsets.ModelViewSet):
     queryset = Job.objects.prefetch_related('reviews').all()
