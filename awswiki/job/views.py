@@ -15,9 +15,6 @@ class JobAPI(viewsets.ModelViewSet):
     queryset = Job.objects.prefetch_related('reviews').all()
     serializer_class = JobSerializer
 
-class JobReviewsAPI(viewsets.ModelViewSet):
-    queryset = JobReview.objects.all()
-    serializer_class = JobReviewSerializer
     @action(detail=False, methods=['get'])
     def AllSearch(self, request):
         search = request.query_params.get('search')
@@ -33,6 +30,11 @@ class JobReviewsAPI(viewsets.ModelViewSet):
         serializer = searchSerializer(search_results, many=True)
 
         return Response(serializer.data)
+
+class JobReviewsAPI(viewsets.ModelViewSet):
+    queryset = JobReview.objects.all()
+    serializer_class = JobReviewSerializer
+    
 
 
 # Create your views here.

@@ -7,14 +7,14 @@ class Job(models.Model):
     writer = models.CharField(max_length=10)
     content = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now=True)
-    image = models.FileField(upload_to='job/images/', null=True, blank=True)  # added blank=True for forms
+    image = models.FileField(upload_to='job/images/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} by {self.writer}"  
     
 class JobReview(models.Model):
     jobReviewId = models.AutoField(primary_key=True)
-    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name='reviews')  # Updated related_name to 'reviews'
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
     review = models.CharField(max_length=50)
 
     def __str__(self):
