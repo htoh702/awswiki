@@ -1,23 +1,21 @@
 from django.db import models
 
-class note(models.Model):
+class Note(models.Model):
     index = models.AutoField(primary_key=True)
-    tag = models.CharField(max_length=50, null=False)
-    title = models.CharField(max_length=50, null=False)
-    writer = models.CharField(max_length=10, null=False)
-    content = models.CharField(max_length=100, null=False)
-    date = models.DateTimeField(max_length=50, auto_now=True)
-    image = models.FileField(upload_to = 'note/images/', null=True)
+    tag = models.CharField(max_length=50)
+    title = models.CharField(max_length=50)
+    writer = models.CharField(max_length=10)
+    content = models.CharField(max_length=100)
+    date = models.DateTimeField(auto_now=True)
+    image = models.FileField(upload_to='note/images/', null=True, blank=True)  # added blank=True for forms
 
     def __str__(self):
-        return str(self.noteId)
-
-
-class note_reviews(models.Model):
+        return f"{self.title} by {self.writer}"  
+    
+class NoteReview(models.Model):
     noteReviewId = models.AutoField(primary_key=True)
-    index = models.ForeignKey(note, on_delete=models.CASCADE)
-    reivew = models.CharField(max_length=50)
-
+    note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='reviews')  # Updated related_name to 'reviews'
+    review = models.CharField(max_length=50)
 
     def __str__(self):
-        return str(self.noteReviewId)
+        return self.review 

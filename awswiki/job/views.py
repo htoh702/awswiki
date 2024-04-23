@@ -1,3 +1,6 @@
+from rest_framework import viewsets
+from .serializers import JobSerializer, JobReviewSerializer
+from .models import Job, JobReview
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -9,9 +12,12 @@ from note.models import note
 from photo.models import photo
 
 class JobAPI(viewsets.ModelViewSet):
-    queryset = job.objects.all()
-    serializer_class = jobSerializer
+    queryset = Job.objects.prefetch_related('reviews').all()
+    serializer_class = JobSerializer
 
+class JobReviewsAPI(viewsets.ModelViewSet):
+    queryset = JobReview.objects.all()
+    serializer_class = JobReviewSerializer
     @action(detail=False, methods=['get'])
     def AllSearch(self, request):
         search = request.query_params.get('search')
@@ -27,10 +33,6 @@ class JobAPI(viewsets.ModelViewSet):
         serializer = searchSerializer(search_results, many=True)
 
         return Response(serializer.data)
-
-class Job_reviewsAPI(viewsets.ModelViewSet):
-    queryset = job_reviews.objects.all()
-    serializer_class = job_reviewsSerializer
 
 
 # Create your views here.

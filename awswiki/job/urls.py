@@ -1,16 +1,16 @@
-from django.urls import path,include
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import JobAPI, JobReviewsAPI
 
-from .views import JobAPI, Job_reviewsAPI
-from rest_framework import routers
+# Create routers for each of the viewsets
+Job_router = DefaultRouter()
+Job_router.register(r'api', JobAPI, basename='Job')
 
-job_router = routers.DefaultRouter()
-job_router.register(r'api', JobAPI, basename="Job_api")
+Job_reviews_router = DefaultRouter()
+Job_reviews_router.register(r'api', JobReviewsAPI, basename='Job_review')
 
-job_reviews_router = routers.DefaultRouter()
-job_reviews_router.register(r'api', Job_reviewsAPI, basename="Job_api_reviews")
-
-
+# URL patterns that include the routers
 urlpatterns = [
-    path('', include(job_router.urls)),
-    path('reviews/', include(job_reviews_router.urls))
+    path('', include(Job_router.urls)),
+    path('review/', include(Job_reviews_router.urls)),
 ]

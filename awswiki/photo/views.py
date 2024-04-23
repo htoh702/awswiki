@@ -1,17 +1,18 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework import viewsets, status
-from photo.serializers import photoSerializer, photo_reviewsSerializer
-from photo.models import photo, photo_reviews
+from django.shortcuts import get_list_or_404
+from .models import Photo
+from .serializers import PhotoSerializer
 
-class photoAPI(viewsets.ModelViewSet):
-    queryset = photo.objects.all()
-    serializer_class = photoSerializer
+class PhotoAPI(viewsets.ModelViewSet):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
 
-class photo_reviewsAPI(viewsets.ModelViewSet):
-    queryset = photo_reviews.objects.all()
-    serializer_class = photo_reviewsSerializer
-
-
-# Create your views here.
+class PhotoDateAPI(APIView):
+    def get(self, request, date, format=None):
+        photos = Photo.objects.filter(date__date=date)
+        if not photos.exists():
+            return Response({"message": "No photos found for this date"}, status=404)
+        serializer = PhotoSerializer(photos, many=True)
+        return Response(serializer.data)

@@ -1,17 +1,11 @@
-from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework import viewsets, status
-from note.serializers import noteSerializer, note_reviewsSerializer
-from note.models import note, note_reviews
+from rest_framework import viewsets
+from .serializers import NoteSerializer, NoteReviewSerializer
+from .models import Note, NoteReview
 
-class noteAPI(viewsets.ModelViewSet):
-    queryset = note.objects.all()
-    serializer_class = noteSerializer
+class NoteAPI(viewsets.ModelViewSet):
+    queryset = Note.objects.prefetch_related('reviews').all()
+    serializer_class = NoteSerializer
 
-class note_reviewsAPI(viewsets.ModelViewSet):
-    queryset = note_reviews.objects.all()
-    serializer_class = note_reviewsSerializer
-
-
-# Create your views here.
+class NoteReviewsAPI(viewsets.ModelViewSet):
+    queryset = NoteReview.objects.all()
+    serializer_class = NoteReviewSerializer

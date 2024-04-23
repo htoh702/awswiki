@@ -1,15 +1,18 @@
 from rest_framework import serializers
-from .models import job_reviews, job
+from .models import Job, JobReview
 
-class jobSerializer(serializers.ModelSerializer):
-    class Meta :
-        model = job
+class JobReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JobReview
         fields = '__all__'
 
-class job_reviewsSerializer(serializers.ModelSerializer):
-    class Meta :
-        model = job_reviews
+class JobSerializer(serializers.ModelSerializer):
+    reviews = JobReviewSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Job
         fields = '__all__'
+
 
 class searchSerializer(serializers.Serializer):
     index = serializers.IntegerField()
