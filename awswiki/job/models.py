@@ -10,7 +10,8 @@ class Job(models.Model):
     image = models.FileField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.title} by {self.writer}"  
+        return str(self.index)
+
     
 class JobReview(models.Model):
     jobReviewId = models.AutoField(primary_key=True)

@@ -10,8 +10,7 @@ class Note(models.Model):
     image = models.FileField(upload_to='note/images/', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.title} by {self.writer}"  
-    
+        return str(self.index)    
 class NoteReview(models.Model):
     noteReviewId = models.AutoField(primary_key=True)
     note = models.ForeignKey(Note, on_delete=models.CASCADE, related_name='reviews')
