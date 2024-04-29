@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from google.oauth2 import service_account
 import my_settings
+import json
+import base64
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,9 +37,15 @@ DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 GS_BUCKET_NAME = 'awswiki_image_data' 
 GS_PROJECT_ID = 'k8s-ohhong'
 
-GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    "path\k8s-ohhong-85c916f15ad6.json"
-)
+json_str = os.environ.get('GCLOUD_CREDENTIALS_JSON')
+
+credentials_info = json.loads(json_str)
+
+GS_CREDENTIALS = service_account.Credentials.from_service_account_info(credentials_info)
+
+# GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+#     "path\k8s-ohhong-85c916f15ad6.json"
+# )
 
 # Application definition
 
