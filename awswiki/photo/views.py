@@ -11,8 +11,8 @@ class PhotoAPI(viewsets.ModelViewSet):
     serializer_class = PhotoSerializer
 
     def create(self, request, *args, **kwargs):
-        image = request.FILES["image"]
-        url = upload_image(image, "job")
+        images = request.FILES.get("image")
+        url = upload_image(images, "photo")
 
         serializer = self.get_serializer(data=request.data)
 

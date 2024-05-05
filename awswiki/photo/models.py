@@ -4,7 +4,7 @@ class Photo(models.Model):
     index = models.AutoField(primary_key=True)
     tag = models.CharField(max_length=50)
     date = models.DateTimeField(auto_now=True)
-    image = models.FileField(upload_to='Photo/images/', null=True)
+    image = models.FileField(null=False)
 
     def __str__(self):
         return f"Photo {self.index}"

@@ -1,23 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-MIGRATE_COMMAND="python manage.py migrate"
-RUNSERVER_COMMAND="python manage.py runserver 0.0.0.0:8000"
+python manage.py makemigrations
+python trymigrate.py
 
-RETRY_COUNT=10
-FAILED_COUNT=0
+python init_job_db.py
+python init_note_db.py
+python init_photo_db.py
 
-while [ $FAILED_COUNT -lt $RETRY_COUNT ]
-do
-    $MIGRATE_COMMAND
-    if [ $? -eq 0 ]; then
-        echo "success"
-        $RUNSERVER_COMMAND
-        exit 0
-    else
-        echo "fail"
-        sleep 10
-        FAILED_COUNT=$((FAILED_COUNT+1))
-    fi
-done
-
-exit 1
+python manage.py runserver 0.0.0.0:8000

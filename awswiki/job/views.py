@@ -22,8 +22,8 @@ class JobAPI(viewsets.ModelViewSet):
         return Response(serializer.data)
     
     def create(self, request, *args, **kwargs):
-        image = request.FILES["image"]
-        url = upload_image(image, "job")
+        images = request.FILES.get("image")
+        url = upload_image(images, "job")
 
         serializer = self.get_serializer(data=request.data)
 

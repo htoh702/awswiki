@@ -5,9 +5,9 @@ class Note(models.Model):
     tag = models.CharField(max_length=50)
     title = models.CharField(max_length=50)
     writer = models.CharField(max_length=10)
-    content = models.CharField(max_length=100)
+    content = models.CharField(max_length=1000)
     date = models.DateTimeField(auto_now=True)
-    image = models.FileField(upload_to='note/images/', null=True, blank=True)
+    image = models.FileField(null=False)
 
     def __str__(self):
         return str(self.index)    
