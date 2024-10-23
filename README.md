@@ -2,16 +2,16 @@
 
 개발 기간: 
 2024.05.07 ~ 2024.05.14
----
+
 개발환경: 
 Docker, Kubernetes, Django, Next JS, MySQL, EFK
----
+
 개발 인원: 
 4명
----
+
 맡은 역할: 
 Django를 활용한 백엔드 개발, MySQL을 이용한 데이터 모델 설계 및 구축, Docker를 이용한 Dockerfile 작성 및 Docker Compose 구성, EFK를 이용하여 모니터링 구축
----
+
 내용 요약:
 공부하면서 정리한 필기노트를 공유하고 모르는 문제는 묻고 답할 수 있는 서비스입니다.  
 ---
